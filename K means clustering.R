@@ -67,4 +67,7 @@ image(t(dataMatrix)[,order(kmeansObj$cluster)],yaxt="n")
 
 ?t
 
+################### start new script at
+# https://www.coursera.org/learn/exploratory-data-analysis/lecture/5ospt/dimension-reduction-part-1
+# Dimension Reduction
 
