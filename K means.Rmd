@@ -1,0 +1,67 @@
+---
+title: "K means"
+author: "Kevin Mahon"
+date: "`r Sys.Date()`"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# K Means Clustering
+
+Summarizing high dimensional data - What kinds of observations are similar to each other and what observations are very different. What does it mean to be close? How do we group things? How do we visualize the grouping? How do we interpret the grouping?
+
+Pick a distance/similarity that makes sense for your problem
+
+continuous
+
+-   euclidean distance
+-   correlation similarity
+
+binary
+
+-   manhattan distance
+
+This is a partitioning approach:
+
+-   Fix a number of clusters
+-   get "centroids" of each cluster
+-   assign things to the closest centroid
+-   recalculate centroids
+
+Requirements for Kmeans are
+
+-   a defined distance metric
+-   a number of clusters
+-   an initial guess
+
+This produces a final estimate of cluster centroids, an assignment of each point to clusters
+
+```{r}
+set.seed(1234); par(mar=c(0,0,0,0)) 
+x <- rnorm(12,mean=rep(1:3,each=4),sd=0.2) 
+y<- rnorm(12,mean=rep(c(1,2,1),each=4),sd=0.2) 
+plot(x,y,col="blue",pch=19,cex=2) 
+text(x+0.05,y+0.05,labels=as.character(1:12))
+```
+
+This data is pretty clustered, looks like 3 clusters. He adds additional (3) symbols and assigns groups to these symbols (clusters)
+
+```{r,echo=FALSE}
+?kmeans
+kmeans(x, centers, iter.max = 10, nstart = 1)
+```
+
+Important parameters:
+
+-   x: numeric matrix of data, or an object that can be coerced to such a matrix (such as a numeric vector or a data frame with all numeric columns).
+-   centers: either the number of clusters, say kk, or a set of initial (distinct) cluster centres. If a number, a random set of (distinct) rows in x is chosen as the initial centres.
+-   iter.max: the maximum number of iterations allowed.
+-   nstart: if centers is a number, how many random sets should be chosen?
+
+```{r}
+dataFrame<-data.frame(x,y)
+kmeansObj<-kmeans(dataFrame,centers=3)
+names(kmeansObj)
+kmeansObj$cluster
+```
